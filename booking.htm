@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Booking Page</title>
+<link rel="stylesheet" href="stylesheet.css">
+<script type="text/javascript" src="xhr.js"></script>
+<script type="text/javascript" src="bookingprocess.js"></script>
+</head>
+
+<style>
+body {
+    background-color: #3399FF;
+	text-align:center
+}
+
+h1 {
+    text-align: center;
+}
+</style>
+
+
+<body>
+<h1>CabsOnline</h1>
+
+<form name= "booking" action="bookingprocess.php" method="post">
+<p>Customer Name: <input type="text" name="custname"><span style = color:red>* </p>
+<p>Contact Phone No.: <input type="text" name="phone"><span style = color:red>* </p><br>
+
+<p><strong>Pick Up Location:</strong></p>
+
+<p>Unit Number: <input type="text" name="unitno" size="3">
+   Street Number: <input type="text" name="streetno" size="3"></p>
+<p>Street Name: <input type="text" name="streetname"></p>
+<p>Suburb: <input type="text" name="suburb"></p><br>
+
+<p><strong>Destination Suburb: </strong><input type="text" name="destination"><br></p>
+
+<p>Pick-up Date: <input type="text" name="pickupdate" id="theDate" value=""></p>
+<p>Pick-up Time: <input type="text" name="pickuptime" id="theTime" size="3">
+<select name="ampm">
+<option value="am">am</option>
+<option value="pm">pm</option>
+</select></p>
+
+<p><input name="submit" type = "button" onclick = "getData('bookingprocess.php', 'targetDiv', custname.value, phone.value, unitno.value, streetno.value, streetname.value, suburb.value, destination.value, pickupdate.value, pickuptime.value, ampm.value)" value= "Request Taxi"></p>
+
+</form>
+
+<div id="targetDiv">
+
+</div>
+ 
+<script type="text/javascript">
+window.onload = function() {
+	
+	//Get current date
+	var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1;
+
+    var yyyy = today.getFullYear();
+    if(dd<10) {
+        dd='0'+dd
+    } 
+    if(mm<10) {
+        mm='0'+mm
+    } 
+    var today = dd+'/'+mm+'/'+yyyy;
+    document.getElementById("theDate").value = today;
+	
+	//Get current time
+	var time = new Date();
+	var hours = time.getHours();
+	var mins = time.getMinutes();
+	
+	//Round up to next half hour
+	if(mins<30) {
+		mins = 30;
+	} else {
+		hours = hours+1;
+		mins = '00';
+	}
+	
+	if(hours>12) 
+		hours= hours-12;
+	
+	
+	var time = hours+':'+mins;
+	document.getElementById("theTime").value = time;
+}
+</script>
+
+</body>
+</html>
