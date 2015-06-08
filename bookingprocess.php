@@ -10,7 +10,9 @@
 	$pickupdate = $_POST['pickupdate'];
 	$pickuptime = $_POST['pickuptime'];
 	$ampm = $_POST['ampm'];
-	
+	//Convert time and date
+	$pickuptime = date("H:i", strtotime($pickuptime));
+		
 	//connect to Database
 	require_once ("settings.php"); 
 	$dbconn = mysqli_connect($host, $user, $pswd , $dbnm); 
@@ -33,14 +35,33 @@
 	
 	//Post into database
 	$post_sql = "INSERT INTO cabstable(custname, phone, unitno, streetno, streetname, suburb, destination, pickupdate, pickuptime, ampm, status) VALUES ('$custname', '$phone', '$unitno', '$streetno', '$streetname', '$suburb', '$destination', '$pickupdate', '$pickuptime', '$ampm', 'unassigned')";
+	
+	$reference = 1;
+	$ref = "SELECT reference FROM cabstable ORDER BY reference DESC LIMIT 1";
+	$ref_query = mysqli_query($dbconn, $ref) or die(mysqli_error($dbconn));
+	$rowCount = mysqli_num_rows($ref_query);
+	if($rowCount > 0)
+	{
+		//Get the last booking number
+		$row = mysqli_fetch_assoc($ref_query);
+		//lastr booking number + 1
+		$reference += $row["reference"];
+		
+	}
+	
+	
 	//Execute insert query
 	$post_Query = mysqli_query($dbconn, $post_sql) or die(mysqli_error($dbconn));
+	
 	//If post is success
 	if($post_Query)
 	{
-		
 		//Tell the user success and givve reference number and date and time
-		echo "Booking requested!";
+		
+		echo "Booking requested!<br>Your reference number is #" . "<b>". $reference . "<br>" . "<br>";
+		echo "Your pick-up date is " . $pickupdate . "<br>";
+		echo "Your pick-up time is " . $pickuptime . $ampm . "<br>";
+		
 	} 
 	//Close connection
 	mysqli_close($dbconn);

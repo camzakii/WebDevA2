@@ -23,6 +23,7 @@ h1 {
 
 <body>
 <h1>CabsOnline</h1>
+<p><strong><i>Book your cab here</i></strong></p><br>
 
 <form name= "booking" action="bookingprocess.php" method="post">
 <p>Customer Name: <input type="text" name="custname"><span style = color:red>* </p>
@@ -44,7 +45,9 @@ h1 {
 <option value="pm">pm</option>
 </select></p>
 
-<p><input name="submit" type = "button" onclick = "getData('bookingprocess.php', 'targetDiv', custname.value, phone.value, unitno.value, streetno.value, streetname.value, suburb.value, destination.value, pickupdate.value, pickuptime.value, ampm.value)" value= "Request Taxi"></p>
+<p><input name="submit" class="button button-primary" type = "button" onclick = "getData('bookingprocess.php', 'targetDiv', custname.value, phone.value, unitno.value, streetno.value, streetname.value, suburb.value, destination.value, pickupdate.value, pickuptime.value, ampm.value)" value= "Request Taxi"></p>
+
+<p><a href="index.php" class="button button-primary"> Home </a></p><br>
 
 </form>
 

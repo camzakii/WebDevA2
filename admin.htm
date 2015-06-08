@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Admin</title>
+<link rel="stylesheet" href="stylesheet.css">
+<script type="text/javascript" src="xhr.js"></script>
+<script type="text/javascript" src="adminprocess.js"></script>
+</head>
+
+<style>
+body {
+    background-color: #3399FF;
+	text-align:center
+}
+
+h1 {
+    text-align: center;
+}
+</style>
+
+
+<body>
+<h1>Administration</h1>
+<p><strong><i>Track your cab status</i></strong></p><br>
+
+<p>Enter a reference number: 
+<input type="text" name="refnum">
+
+<input name="submit" class="button button-primary" type = "button" onclick = "getData('bookingprocess.php', 'targetDiv', custname.value, phone.value, unitno.value, streetno.value, streetname.value, suburb.value, destination.value, pickupdate.value, pickuptime.value, ampm.value)" value= "Assign Taxi"><br>
+
+<input type="submit" 
+
+<div id="targetDiv">
+
+</div>
+
+
+<p><a href="index.php" class="button button-primary"> Home </a></p><br>
+</body>
+</html>
